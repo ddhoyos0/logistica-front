@@ -1,0 +1,64 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-secondary">
+      Registro de clientes
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+        <div class=" row col-12">
+          <div class=" col-4 form-group">
+            <label for="nombre">Tipo de Identificación:</label>
+            <select class="form-select" aria-label="Default select example" id="tipoIdentificacion"
+                    name="tipoIdentificacion" [(ngModel)]="tipoIdentificacion" required>
+              <option value="0">Seleccionar</option>
+              <option *ngFor="let item of listaTipoIdentificacion; index as i; " value="{{item.codigo}}">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="numeroIdentificacion">Número de Identificación:</label>
+            <input type="text" class="form-control" id="numeroIdentificacion" name="numeroIdentificacion"
+                   [(ngModel)]="numeroIdentificacion" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"
+                   [(ngModel)]="nombre" required>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="nombre">Dirección:</label>
+            <input type="text" class="form-control" id="direccion" name="direccion"
+                   [(ngModel)]="direccion" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Teléfono:</label>
+            <input type="text" class="form-control" id="telefono" name="telefono"
+                   [(ngModel)]="telefono">
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Célular:</label>
+            <input type="text" class="form-control" id="celular" name="celular"
+                   [(ngModel)]="celular" required>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="nombre">Correo:</label>
+            <input type="text" class="form-control" id="correo" name="correo"
+                   [(ngModel)]="correo" required>
+          </div>
+          <div class="col-4 mt-4 btn-group">
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+              <i class="fas fa-plus-circle"></i> Crear
+            </button>
+            <button class="btn btn-outline-primary btn-block" routerLink="/lista">
+              <i class="fas fa-arrow-alt-circle-left"></i> Volver
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
