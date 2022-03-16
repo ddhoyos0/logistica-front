@@ -1,0 +1,64 @@
+<app-nav-bar></app-nav-bar>
+<div class="container" *ngIf="cliente">
+  <div class="card">
+    <div class="card-header text-white bg-secondary">
+      Actualizar clientes
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+        <div class=" row col-12">
+          <div class=" col-4 form-group">
+            <label for="nombre">Tipo de Identificación:</label>
+            <select class="form-select" aria-label="Default select example" id="tipoIdentificacion"
+                    name="tipoIdentificacion" [(ngModel)]="cliente.tipoIdentificacion" required>
+              <option value="0">Seleccionar</option>
+              <option *ngFor="let item of listaTipoIdentificacion; index as i; " value="{{item.codigo}}">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="numeroIdentificacion">Número de Identificación:</label>
+            <input type="text" class="form-control" id="numeroIdentificacion" name="numeroIdentificacion"
+                   [(ngModel)]="cliente.numeroIdentificacion" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"
+                   [(ngModel)]="cliente.nombre" required>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="nombre">Dirección:</label>
+            <input type="text" class="form-control" id="direccion" name="direccion"
+                   [(ngModel)]="cliente.direccion" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Teléfono:</label>
+            <input type="text" class="form-control" id="telefono" name="telefono"
+                   [(ngModel)]="cliente.telefono">
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Célular:</label>
+            <input type="text" class="form-control" id="celular" name="celular"
+                   [(ngModel)]="cliente.celular" required>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="nombre">Correo:</label>
+            <input type="text" class="form-control" id="correo" name="correo"
+                   [(ngModel)]="cliente.correo" required>
+          </div>
+          <div class="col-4 mt-4 btn-group">
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+              <i class="fas fa-plus-circle"></i> Actualizar
+            </button>
+            <button class="btn btn-outline-primary btn-block" routerLink="/cliente/listar">
+              <i class="fas fa-arrow-alt-circle-left"></i> Volver
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

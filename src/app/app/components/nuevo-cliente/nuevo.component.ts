@@ -31,9 +31,9 @@ export class NuevoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listaTipoIdentificacion.push(new TipoDocumento("CC","Cedula de Ciudadania"))
-    this.listaTipoIdentificacion.push(new TipoDocumento("TI","Tarjeta de identidad"))
-    this.listaTipoIdentificacion.push(new TipoDocumento("NIT","Nit"))
+    this.listaTipoIdentificacion.push(new TipoDocumento("CC", "Cedula de Ciudadania"))
+    this.listaTipoIdentificacion.push(new TipoDocumento("TI", "Tarjeta de identidad"))
+    this.listaTipoIdentificacion.push(new TipoDocumento("NIT", "Nit"))
   }
 
   onCreate(): void {
@@ -52,7 +52,7 @@ export class NuevoComponent implements OnInit {
         this.toastr.success('Cliente Creado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
-        this.router.navigate(['/cliente/lista']);
+        this.router.navigate(['/cliente/listar']);
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {

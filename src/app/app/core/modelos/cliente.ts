@@ -1,12 +1,13 @@
 export class Cliente {
   id!: number;
-  tipoIdentificacion: string;
-  numeroIdentificacion: string;
-  nombre: string;
-  direccion: string;
-  telefono: string;
-  celular: string;
-  correo: string;
+  tipoIdentificacion!: string;
+  numeroIdentificacion!: string;
+  nombre!: string;
+  direccion!: string;
+  telefono!: string;
+  celular!: string;
+  correo!: string;
+
 
   constructor(tipoIdentificacion: string, numeroIdentificacion: string, nombre: string, direccion: string, telefono: string, celular: string, correo: string) {
     this.tipoIdentificacion = tipoIdentificacion;
@@ -17,4 +18,5 @@ export class Cliente {
     this.celular = celular;
     this.correo = correo;
   }
+
 }

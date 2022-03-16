@@ -15,6 +15,22 @@ export class ClienteService {
   }
 
   public guardar(cliente: Cliente): Observable<any> {
-    return this.httpClient.post(this.URL + 'registrar', cliente);
+    return this.httpClient.post<any>(this.URL + 'registrar', cliente);
+  }
+
+  public listar(): Observable<Cliente[]> {
+    return this.httpClient.get<Cliente[]>(this.URL + 'listar')
+  }
+
+  public eliminar(id: number): Observable<any> {
+    return this.httpClient.delete<any>(this.URL + `eliminar/${id}`);
+  }
+
+  public actualizar(id: number, cliente: Cliente): Observable<Cliente> {
+    return this.httpClient.put<Cliente>(this.URL + `actualizar/${id}`, cliente);
+  }
+
+  public getCliente(id: number): Observable<Cliente> {
+    return this.httpClient.get<Cliente>(this.URL + `get/${id}`);
   }
 }
