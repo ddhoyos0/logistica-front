@@ -1,0 +1,50 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-secondary">
+      <div class="row">
+        <div class="col-10">
+          Listado de productos
+        </div>
+        <div class="col-2">
+          <button  class="btn btn-success align-content-md-end" routerLink="/producto/registrar">
+            <i class="bi bi-file-plus"></i> Nuevo producto
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table dataTables">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let producto of listaProducto; index as i;">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{producto.codigo}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio | currency:"COP":"symbol"}}</td>
+            <td *ngIf="isUser">
+              <button class="btn btn-outline-warning" routerLink="/producto/editar/{{producto.id}}">
+                <i class="bi bi-pencil-square"></i> Editar
+              </button>
+            </td>
+            <td *ngIf="isUser">
+              <button class="btn btn-outline-danger" (click)="borrar(producto.id)">
+                <i class="bi bi-trash3"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

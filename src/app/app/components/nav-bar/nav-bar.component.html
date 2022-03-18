@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="/">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,12 +9,30 @@
         <a class="nav-link" routerLink="/"><i class="fas fa-home"></i> Inicio</a>
       </li>
       <li class="nav-item dropdown"*ngIf="isLogged">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Clientes
         </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
           <li><a class="dropdown-item" routerLink="/cliente/registrar">Registrar</a></li>
           <li><a class="dropdown-item" href="/cliente/listar">Listar</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown"*ngIf="isLogged">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Productos
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+          <li><a class="dropdown-item" routerLink="/producto/registrar">Registrar</a></li>
+          <li><a class="dropdown-item" href="/producto/listar">Listar</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown"*ngIf="isLogged">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Despachos
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+          <li><a class="dropdown-item" routerLink="/despacho/registrar">Registrar</a></li>
+          <li><a class="dropdown-item" href="/despacho/listar">Listar</a></li>
         </ul>
       </li>
       <li class="nav-item" *ngIf="!isLogged">
