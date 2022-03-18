@@ -12,7 +12,7 @@ import {DespachoService} from "../../core/servicios/despacho/despacho.service";
   styleUrls: ['./listar-despacho.component.css']
 })
 export class ListarDespachoComponent implements OnInit {
-
+  filterpost = '';
   listaDespacho: Despacho [] = [];
   roles: string[] = [];
   isUser = false;

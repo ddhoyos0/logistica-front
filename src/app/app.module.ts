@@ -22,6 +22,7 @@ import { EditarProductoComponent } from './app/components/editar-producto/editar
 import { NuevoDespachoComponent } from './app/components/nuevo-despacho/nuevo-despacho.component';
 import { ListarDespachoComponent } from './app/components/listar-despacho/listar-despacho.component';
 import { EditarDespachoComponent } from './app/components/editar-despacho/editar-despacho.component';
+import { FiltrarPipe } from './app/pipes/filtrar.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditarDespachoComponent } from './app/components/editar-despacho/editar
     EditarProductoComponent,
     NuevoDespachoComponent,
     ListarDespachoComponent,
-    EditarDespachoComponent
+    EditarDespachoComponent,
+    FiltrarPipe
   ],
   imports: [
     BrowserModule,
