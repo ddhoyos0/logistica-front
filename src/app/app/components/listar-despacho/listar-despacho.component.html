@@ -1,0 +1,71 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="card">
+  <div class="card-header text-white bg-secondary">
+    <div class="row">
+      <div class="col-10">
+        Listado de despachos
+      </div>
+      <div class="col-2">
+        <button class="btn btn-success align-content-md-end" routerLink="/despacho/registrar">
+          <i class="bi bi-file-plus"></i> Nuevo despacho
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <input
+      type="text"
+      class="forms-control"
+      placeholder="Buscar.."
+      [(ngModel)]="filterpost"
+      name="filterpost"
+    />
+    <div class="table-responsive">
+      <table class="table dataTables">
+        <thead>
+        <tr>
+          <th scope="col">Tipo envío</th>
+          <th scope="col">Tipo producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Fecha registro</th>
+          <th scope="col">Fecha entrega</th>
+          <th scope="col">Lugar entrega</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Placa</th>
+          <th scope="col">Número guia</th>
+          <th scope="col">Descuento</th>
+          <th scope="col">Cliente</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let despacho of listaDespacho | filtrar: filterpost; index as i;  ">
+          <td>{{despacho.tipoEnvio}}</td>
+          <td>{{despacho.tipoProducto.nombre}} C/U {{despacho.tipoProducto.precio | currency}}</td>
+          <td>{{despacho.cantidad}}</td>
+          <td>{{despacho.fechaRegistro}}</td>
+          <td>{{despacho.fechaEntrega}}</td>
+          <td>{{despacho.lugarEntrega}}</td>
+          <td>{{despacho.precio | currency:"COP":"symbol"}}</td>
+          <td>{{despacho.placa}}</td>
+          <td>{{despacho.numeroGuia}}</td>
+          <td>{{despacho.descuento}}</td>
+          <td>{{despacho.cliente.nombre}}</td>
+          <td *ngIf="isUser">
+            <button class="btn btn-outline-warning" routerLink="/producto/editar/{{despacho.id}}">
+              <i class="bi bi-pencil-square"></i> Editar
+            </button>
+          </td>
+          <td *ngIf="isUser">
+            <button class="btn btn-outline-danger" (click)="borrar(despacho.id)">
+              <i class="bi bi-trash3"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
