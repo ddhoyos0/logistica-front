@@ -1,1 +1,41 @@
-<p>editar-producto works!</p>
+<app-nav-bar></app-nav-bar>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-secondary">
+      Actualizar producto
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+        <div class=" row col-12">
+          <div class=" col-4 form-group">
+            <label for="codigo">Código:</label>
+            <input type="text" class="form-control" id="codigo" name="codigo"
+                   [(ngModel)]="producto.codigo" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"
+                   [(ngModel)]="producto.nombre" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="precio">Precio:</label>
+            <input type="number" class="form-control" id="precio" name="precio"
+                   [(ngModel)]="producto.precio" required>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class="col-4 mt-4 btn-group">
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+              <i class="fas fa-plus-circle"></i> Crear
+            </button>
+            <button class="btn btn-outline-primary btn-block" routerLink="/producto/listar">
+              <i class="fas fa-arrow-alt-circle-left"></i> Volver
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
