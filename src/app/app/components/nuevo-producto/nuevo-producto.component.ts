@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductoService} from "../../core/servicios/producto/producto.service";
-import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
-import {Despacho} from "../../core/modelos/despacho";
 import {TipoProducto} from "../../core/modelos/tipo-producto";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevo-producto',
@@ -18,9 +17,9 @@ export class NuevoProductoComponent implements OnInit {
 
   constructor(
     private servicioProducto: ProductoService,
-    private toastr: ToastrService,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -33,14 +32,21 @@ export class NuevoProductoComponent implements OnInit {
     );
     this.servicioProducto.guardar(producto).subscribe(
       data => {
-        this.toastr.success('Producto Creado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto guardado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
         this.router.navigate(['/producto/listar']);
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al guardar producto!',
+          footer: err.error.mensaje
         });
       }
     );

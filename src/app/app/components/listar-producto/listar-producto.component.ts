@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TipoProducto} from "../../core/modelos/tipo-producto";
-import {ToastrService} from "ngx-toastr";
 import {TokenService} from "../../core/servicios/token/token.service";
 import {ProductoService} from "../../core/servicios/producto/producto.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-producto',
@@ -17,7 +17,6 @@ export class ListarProductoComponent implements OnInit {
 
   constructor(
     private servicioProducto: ProductoService,
-    private toastr: ToastrService,
     private tokenService: TokenService
   ) { }
 
@@ -37,8 +36,11 @@ export class ListarProductoComponent implements OnInit {
         this.listaProducto = data
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar producto!',
+          footer: err.error.mensaje
         });
       }
     );
@@ -47,14 +49,21 @@ export class ListarProductoComponent implements OnInit {
   borrar(id: number) {
     this.servicioProducto.eliminar(id).subscribe(
       data => {
-        this.toastr.success('Producto Eliminado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto eliminado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
         this.cargarProducto();
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al eliminar producto!',
+          footer: err.error.mensaje
         });
       }
     );

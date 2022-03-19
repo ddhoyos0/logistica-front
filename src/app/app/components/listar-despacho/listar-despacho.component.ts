@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Cliente} from "../../core/modelos/cliente";
 import {Despacho} from "../../core/modelos/despacho";
-import {ClienteService} from "../../core/servicios/cliente/cliente.service";
-import {ToastrService} from "ngx-toastr";
 import {TokenService} from "../../core/servicios/token/token.service";
 import {DespachoService} from "../../core/servicios/despacho/despacho.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-despacho',
@@ -19,7 +17,6 @@ export class ListarDespachoComponent implements OnInit {
 
   constructor(
     private servicioDespacho: DespachoService,
-    private toastr: ToastrService,
     private tokenService: TokenService
   ) {
   }
@@ -40,8 +37,11 @@ export class ListarDespachoComponent implements OnInit {
         this.listaDespacho = data
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar despacho!',
+          footer: err.error.mensaje
         });
       }
     );
@@ -50,14 +50,21 @@ export class ListarDespachoComponent implements OnInit {
   borrar(id: number) {
     this.servicioDespacho.eliminar(id).subscribe(
       data => {
-        this.toastr.success('Despacho Eliminado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Despacho eliminado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
         this.cargarDespacho();
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al eliminar despacho!',
+          footer: err.error.mensaje
         });
       }
     );

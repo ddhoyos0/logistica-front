@@ -5,9 +5,9 @@ import {Cliente} from "../../core/modelos/cliente";
 import {ProductoService} from "../../core/servicios/producto/producto.service";
 import {ClienteService} from "../../core/servicios/cliente/cliente.service";
 import {DespachoService} from "../../core/servicios/despacho/despacho.service";
-import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {Despacho} from "../../core/modelos/despacho";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevo-despacho',
@@ -23,7 +23,6 @@ export class NuevoDespachoComponent implements OnInit {
   tipoEnvio = '';
   tipoProducto!: TipoProducto;
   cantidad = 0;
-  fechaRegistro = new Date;
   fechaEntrega = new Date;
   lugarEntrega = '';
   precio = 0;
@@ -35,7 +34,6 @@ export class NuevoDespachoComponent implements OnInit {
   control = false;
 
   constructor(
-    private toastr: ToastrService,
     private router: Router,
     private servicioProducto: ProductoService,
     private servicioCliente: ClienteService,
@@ -59,11 +57,12 @@ export class NuevoDespachoComponent implements OnInit {
       dato => {
         this.listadoCliente = dato;
       }, err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
-
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar clientes!',
+          footer: err.error.mensaje
         });
-
       });
   }
 
@@ -72,11 +71,12 @@ export class NuevoDespachoComponent implements OnInit {
       dato => {
         this.listaTipoProducto = dato;
       }, err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
-
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar tipo producto!',
+          footer: err.error.mensaje
         });
-
       });
   }
 
@@ -115,17 +115,23 @@ export class NuevoDespachoComponent implements OnInit {
       this.descuento,
       this.cliente
     );
-    console.log(despacho);
     this.servicioDespacho.guardar(despacho).subscribe(
       data => {
-        this.toastr.success('Despacho Creado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Despacho guardado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
         this.router.navigate(['/despacho/listar']);
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al registrar despacho!',
+          footer: err.error.mensaje
         });
       }
     );
