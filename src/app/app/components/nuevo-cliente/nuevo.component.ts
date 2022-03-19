@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
 import {Cliente} from "../../core/modelos/cliente";
 import {ClienteService} from "../../core/servicios/cliente/cliente.service";
 import {TipoDocumento} from "../../core/modelos/tipo-documento";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-nuevo-cliente',
@@ -24,7 +24,6 @@ export class NuevoComponent implements OnInit {
 
 
   constructor(
-    private toastr: ToastrService,
     private router: Router,
     private servicioCliente: ClienteService
   ) {
@@ -49,14 +48,21 @@ export class NuevoComponent implements OnInit {
 
     this.servicioCliente.guardar(cliente).subscribe(
       data => {
-        this.toastr.success('Cliente Creado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Cliente guardado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
         this.router.navigate(['/cliente/listar']);
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al guardar cliente!',
+          footer: err.error.mensaje
         });
       }
     );

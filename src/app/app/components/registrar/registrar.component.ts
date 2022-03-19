@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenService} from "../../core/servicios/token/token.service";
 import {AuthService} from "../../core/servicios/auth/auth.service";
 import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
 import {Usuario} from "../../core/modelos/usuario";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar',
@@ -23,9 +23,9 @@ export class RegistrarComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router,
-    private toastr: ToastrService
-  ) { }
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     if (this.tokenService.getToken()) {
@@ -37,18 +37,24 @@ export class RegistrarComponent implements OnInit {
     this.nuevoUsuario = new Usuario(this.nombre, this.nombreUsuario, this.email, this.password);
     this.authService.nuevo(this.nuevoUsuario).subscribe(
       data => {
-        this.toastr.success('Cuenta Creada', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Usuario registrado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
 
         this.router.navigate(['/login']);
       },
       err => {
         this.errMsj = err.error.mensaje;
-        this.toastr.error(this.errMsj, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al registrar usuario!',
+          footer: err.error.mensaje
         });
-        // console.log(err.error.message);
       }
     );
   }

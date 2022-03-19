@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Cliente} from "../../core/modelos/cliente";
 import {ClienteService} from "../../core/servicios/cliente/cliente.service";
-import {ToastrService} from "ngx-toastr";
 import {TokenService} from "../../core/servicios/token/token.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-cliente',
@@ -17,7 +17,6 @@ export class ListarClienteComponent implements OnInit {
 
   constructor(
     private servicioCliente: ClienteService,
-    private toastr: ToastrService,
     private tokenService: TokenService
   ) {
   }
@@ -38,8 +37,11 @@ export class ListarClienteComponent implements OnInit {
         this.listaclientes = data
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar clientes!',
+          footer: err.error.mensaje
         });
       }
     );
@@ -48,14 +50,21 @@ export class ListarClienteComponent implements OnInit {
   borrar(id: number) {
     this.servicioCliente.eliminar(id).subscribe(
       data => {
-        this.toastr.success('Cliente Eliminado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Cliente eliminado con exito!',
+          showConfirmButton: false,
+          timer: 1500
         });
         this.cargarCliente();
       },
       err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al eliminar cliente!',
+          footer: err.error.mensaje
         });
       }
     );

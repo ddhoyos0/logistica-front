@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Login} from "../../core/modelos/login";
 import {TokenService} from "../../core/servicios/token/token.service";
 import {AuthService} from "../../core/servicios/auth/auth.service";
 import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router,
-    private toastr: ToastrService
-  ) { }
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     if (this.tokenService.getToken()) {
@@ -45,18 +45,26 @@ export class LoginComponent implements OnInit {
         this.tokenService.setUserName(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
         this.roles = data.authorities;
-        this.toastr.success('Bienvenido ' + data.nombreUsuario, 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Bienvenido ' + data.nombreUsuario,
+          showConfirmButton: false,
+          timer: 3000
         });
         this.router.navigate(['/']);
       },
       err => {
         this.isLogged = false;
         this.errMsj = err.error.message;
-        this.toastr.error(this.errMsj, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al iniciar sesión!',
+          footer: err.error.mensaje
         });
-        // console.log(err.error.message);
       }
     );
   }

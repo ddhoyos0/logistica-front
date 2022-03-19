@@ -9,7 +9,6 @@ import {NavBarComponent} from './app/components/nav-bar/nav-bar.component';
 import {HomeComponent} from './app/components/home/home.component';
 import {RegistrarComponent} from './app/components/registrar/registrar.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NuevoComponent} from './app/components/nuevo-cliente/nuevo.component';
@@ -47,7 +46,6 @@ import { FiltrarPipe } from './app/pipes/filtrar.pipe';
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule
   ],

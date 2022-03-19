@@ -1,1 +1,88 @@
-<p>editar-despacho works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="card">
+    <div class="card-header text-white bg-secondary">
+      Registro de despachos
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+        <div class=" row col-12">
+          <p [hidden]="!control" class="text-danger">Debe seleccionar un tipo de producto!!</p>
+          <div class=" col-4 form-group">
+            <label for="tipoEnvio">Tipo de envío:</label>
+            <select class="form-select" aria-label="Default select example" id="tipoEnvio"
+                    name="tipoEnvio" [(ngModel)]="despacho.tipoEnvio" (ngModelChange)="ocultar($event)" required>
+              <option *ngFor="let item of listaTipoEnvio; index as i; " value="{{item.codigo}}">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="tipoProducto">Tipo producto:</label>
+            <select class="form-select" aria-label="Default select example" id="tipoProducto"
+                    name="tipoProducto" [(ngModel)]="despacho.tipoProducto" (ngModelChange)="calcular($event)" required>
+              <option *ngFor="let item of listaTipoProducto; index as i;"
+                      [ngValue]="item">{{item.nombre}} {{item.precio |currency:"COP":"symbol"}}</option>
+            </select>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad"
+                   [(ngModel)]="despacho.cantidad" (ngModelChange)="multiplicar($event)" required>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="cantidad">Fecha de Entrega:</label>
+            <div class="input-group">
+              <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                     name="fechaEntrega" [(ngModel)]="despacho.fechaEntrega" >
+            </div>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="lugarEntrega">Lugar de entrega:</label>
+            <input type="text" class="form-control" id="lugarEntrega" name="lugarEntrega"
+                   [(ngModel)]="despacho.lugarEntrega">
+          </div>
+          <div class=" col-4 form-group">
+            <label for="precio">Precio:</label>
+            <input type="text" class="form-control" id="precio" name="precio"
+                   [(ngModel)]="despacho.precio" required disabled>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="placa">Placa:</label>
+            <input type="text" class="form-control" id="placa" name="placa"
+                   [(ngModel)]="despacho.placa" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="numeroGuia">Número de guia:</label>
+            <input type="text" class="form-control" id="numeroGuia" name="numeroGuia"
+                   [(ngModel)]="despacho.numeroGuia" required>
+          </div>
+          <div class=" col-4 form-group">
+            <label for="descuento">Descuento:</label>
+            <input type="text" class="form-control" id="descuento" name="descuento"
+                   [(ngModel)]="despacho.descuento" required disabled>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class=" col-4 form-group">
+            <label for="cliente">Cliente:</label>
+            <select class="form-select" aria-label="Default select example" id="cliente"
+                    name="tipoEnvio" [(ngModel)]="despacho.cliente" required>
+              <option *ngFor="let item of listadoCliente; index as i; " [ngValue]="item">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class="col-4 mt-4 btn-group">
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+              <i class="fas fa-plus-circle"></i> Crear
+            </button>
+            <button class="btn btn-outline-primary btn-block" routerLink="/despacho/listar">
+              <i class="fas fa-arrow-alt-circle-left"></i> Volver
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
